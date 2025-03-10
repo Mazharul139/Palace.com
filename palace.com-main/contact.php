@@ -18,7 +18,7 @@ else
 		}
 		else
 		{
-			header("Location:Dfilter.php");
+			header("Location:Search.php");
 		}
 	}
 

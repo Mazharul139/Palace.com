@@ -28,6 +28,8 @@ $unerr="";
 	if (isset($_POST['tsearch']))
 	{
 
+
+	//	header("Location:Search.php");
 		$ts = $_POST['tbsearch'];
 		$_SESSION['search']= $ts;
 		if ($ts == "" )
@@ -45,7 +47,7 @@ $unerr="";
 		$result=mysqli_query($con,$sql);	
 		if(mysqli_num_rows($result)>0)
 		{
-					header("Location:Dfilter.php")		;				
+					header("Location:Search.php")		;				
 		}
 		else
 		{

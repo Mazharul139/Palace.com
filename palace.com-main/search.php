@@ -17,11 +17,11 @@ else
 		{
 			echo "enter something";
 		}
+
+
 		else
 		{
 			
-			header("Location:home.php")	;
-		
 		}
 	}
 
@@ -30,7 +30,7 @@ else
 
     <head>
 	
-	    <title>DFilter</title>
+	    <title>Search</title>
 		
     </head>
 	
@@ -65,17 +65,27 @@ else
 			    <td width="85%" valign = "top"  bgcolor="lightgray">
 				
 					
-					    <?php 
+					    <?php
 					    
 					include_once("db.php");
-					//$search = $_SESSION['search'];
+
+					$search = isset($_SESSION['search']) ? $_SESSION['search'] : '';
+
+					if (isset($_GET['search']) && !empty($_GET['search'])) {
+						$_SESSION['search'] = $_GET['search']; // Update session with new search value
+					} else {
+						unset($_SESSION['search']); // If search is empty, clear session
+					}
+
+
 					
-					$sql2 = "SELECT * from ads ";
-					//$sql = "SELECT * from ads WHERE area='$search' ";
-					$result2 = mysqli_query($con, $sql2);
-					$resultCheck2 = mysqli_num_rows($result2);
-					// $result = mysqli_query($con, $sql);
-					// $resultCheck = mysqli_num_rows($result);
+					
+					//$sql2 = "SELECT * from ads ";
+					$sql = "SELECT * from ads WHERE area='$search' ";
+					// $result2 = mysqli_query($con, $sql2);
+					// $resultCheck2 = mysqli_num_rows($result2);
+					$result = mysqli_query($con, $sql);
+					$resultCheck = mysqli_num_rows($result);
 
 
 					echo "<table align='left' width='70%' border='1'>
@@ -94,9 +104,9 @@ else
 					         	
 					         </tr>";
 
-					if ($resultCheck2 > 0) {
+					if ($resultCheck > 0) {
 						
-						while ($row = mysqli_fetch_assoc($result2)) {
+						while ($row = mysqli_fetch_assoc($result)) {
 						echo "<tr>
 					         	<td><img src='{$row['Image']}' hight='100px' width='100px'></td>
 					         	<td>{$row['id']}</td>
@@ -116,10 +126,15 @@ else
 					}
 					echo "</table>";
 
-					
+                   
 
 					
+                    // if (isset($_GET['clear_search'])) {
+                    //     unset($_SESSION['search']);
+                    // }
+					
 					?>
+                    
 						
 						
 				

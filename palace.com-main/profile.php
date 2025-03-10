@@ -29,7 +29,7 @@ $yyyy = $_SESSION['year'];
 		}
 		else
 		{
-			header("Location:Dfilter.php");
+			header("Location:Search.php");
 		}
 	}
 
